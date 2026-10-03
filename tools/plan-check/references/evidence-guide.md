@@ -1,66 +1,71 @@
 # Evidence guide: where evidence lives in a plan package
 
-<!--
-THIS IS THE PART YOU WRITE (second week running: the judgment files
-stay in your hands). The skill uses this guide as its map: for every
-kind of evidence a rubric check names, this file says WHERE to find it
-in a plan package and WHAT GOOD LOOKS LIKE when you do.
-
-Under each family heading below, write:
-
-- Where it lives: the exact places to look. In an eval bundle (which
-  section of the package: the issue context, the repro-evidence block,
-  the candidate plan's scope statement or test plan, the plan comment,
-  the repo-facts block). In live mode (where on GitHub or in the
-  draft: the issue thread, the student's posted repro comment, the
-  repo's docs, the draft plan and comment).
-- What good looks like: one or two sentences someone else could apply.
-  Prefer observable conditions ("the stated cause cites behavior the
-  repro evidence actually shows") over adjectives ("diagnosis is
-  solid").
-
-A rubric check whose evidence this guide cannot locate is a check
-nobody else can execute, and this week that cuts twice: your
-procedure.md tells the skill WHEN to gather each family, and this
-guide tells it WHERE. Write the map you wish your executor had.
--->
-
 ## Diagnosis and grounding
 
-<!-- Where the plan states its cause, and where the repro evidence
-pins down the behavior that cause must explain. What it means for a
-diagnosis to follow from the evidence rather than contradict or
-ignore it. -->
+### Where it lives
+- Eval mode: In the candidate plan under `Diagnosis`, `Cause`, or `Summary`, read directly against the package's `Repro evidence` section (and the original `Issue` description).
+- Live mode: In `plan.md` under `## Diagnosis` (or `## Cause`), read directly against your posted repro comment from Unit 2 and the upstream issue description.
+
+### What good looks like
+- The plan identifies a specific, plausible code mechanism or defect that directly accounts for the symptoms and measurements demonstrated in the repro evidence.
+- It is consistent with all reported controls and measurements.
+- Fails if the stated cause contradicts observed measurements (e.g. blaming a pager when the repro shows syntax highlighting takes 25s without a pager, as in `calib-03`), targets a superficial symptom while ignoring the underlying cause, or invents an unsupported theory.
 
 ## Scope
 
-<!-- Where the plan bounds itself: the in-scope statement, the
-not-in-scope line, the files or areas named. What one bounded change
-looks like next to a drive-by rewrite. -->
+### Where it lives
+- Eval mode: In the candidate plan under `Scope`, `Boundary`, `Files to change`, or within `In scope` and `Out of scope` sub-clauses.
+- Live mode: In `plan.md` under `## Scope` (specifically reading what is explicitly in scope vs. out of scope).
+
+### What good looks like
+- The plan explicitly defines the boundaries of the fix: it specifies the exact files, modules, or functions to be modified, AND explicitly states what adjacent features, behaviors, or files will remain untouched.
+- Fails if the change is open-ended, proposes structural refactors beyond what the bug requires, or omits negative boundaries ("what we won't touch").
 
 ## Executability
 
-<!-- Where the plan says what will actually be done: files or areas,
-approach, order of work. What it means for a stranger to be able to
-start executing without asking the author anything. -->
+### Where it lives
+- Eval mode: In the candidate plan under `Approach`, `Changes`, `Implementation Steps`, or `Plan`.
+- Live mode: In `plan.md` under `## Approach` or `## Implementation Steps`.
+
+### What good looks like
+- Concrete, actionable instructions that an external engineer could follow to implement the change without asking the author clarifying questions.
+- Names specific APIs, callbacks, variables, conditions, or logic alterations.
+- Fails if the steps rely on vague aspirations or deferred exploration (e.g. "poke around the code this weekend", "figure out how undo works", or "try tweaking some settings", as in `calib-02`).
 
 ## Test plan
 
-<!-- Where the plan says how success will be observed, and how that
-maps onto the repro evidence's steps and artifacts. What a decisive
-test plan names that a vague one does not. -->
+### Where it lives
+- Eval mode: In the candidate plan under `Test plan`, `Verification`, or `Validation`, read directly against the `Steps` and `Artifact` in the `Repro evidence`.
+- Live mode: In `plan.md` under `## Test plan`, read against your Unit 2 reproduction steps.
+
+### What good looks like
+- Specifies an observable check that directly validates the target bug is resolved: either by re-running the exact repro steps and asserting the fixed outcome, or by adding a targeted unit/integration regression test.
+- Fails if it merely specifies running the existing project test suite (e.g. `cargo test --workspace` or `pytest`) without adding or running a check that specifically targets the reported bug (as in `calib-04`), or if the expected post-fix outcome is unobservable.
 
 ## Honesty
 
-<!-- Where claims meet uncertainty: risks, unknowns, and deviations.
-How to tell stated unknowns from false confidence, and where an
-honest mid-build deviation gets recorded. -->
+### Where it lives
+- Eval mode: In the candidate plan under `Risks`, `Unknowns`, or `Assumptions`, and within the candidate plan comment text.
+- Live mode: In `plan.md` under `## Risks and Unknowns` (and post-build under `## Deviations`), as well as the text in `comment.md`.
+
+### What good looks like
+- Openly acknowledges technical uncertainties, trade-offs, potential regressions, or assumptions requiring confirmation during development.
+- In the comment and plan, work is framed as a proposed fix or bounded attempt; it avoids guaranteeing success, promising bug-free PRs, or committing to arbitrary delivery dates.
+- Post-build, `Deviations` clearly documents any divergence from the original plan, or explicitly notes "no deviations occurred" in the author's own words.
 
 ## Comms
 
-<!-- Where the words meet the thread and the repo: the plan comment
-read against the issue's maintainer signals (thread highlights, or
-the live thread) and against the repo-facts block's stated templates,
-contributing asks, and contribution policy (including AI-use
-disclosure requirements). What thread-aware looks like next to
-boilerplate. -->
+### Where it lives
+- Eval mode:
+  - The `Candidate plan comment` block.
+  - The package's `Thread highlights` (maintainer notes, contributor replies).
+  - The `Repo facts` block under `contribution policy (CONTRIBUTING.md)` or AI policy notes.
+- Live mode:
+  - The candidate comment draft in `comment.md`.
+  - The live GitHub issue thread comments.
+  - The target repository's `CONTRIBUTING.md`, `README.md`, or AI policies.
+
+### What good looks like
+- The plan comment is concise, polite, and directly addresses the issue context.
+- Respects explicit maintainer guidance or cautions found in the thread (e.g. warnings about review bandwidth, API stability, or PR scope).
+- Strictly complies with the repository's AI policy: includes required disclosures if mandated (e.g., human-in-the-loop review disclosures as required by repos like ripgrep in `calib-04`), and refrains from prohibited automated spam. If policy is silent on AI, absence of disclosure passes.

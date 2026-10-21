@@ -7,11 +7,14 @@ the repository is not read. **Keep every section header below under its exact na
 format criteria grade exactly that. Your course repo link is the whole submission: no tool
 files and no evidence uploads are part of Assignment 5.
 
-**Contribution Number:** [1]
-**Student:** [Student name]
-**GitHub Username:** [your GitHub username, exactly as it appears on your profile - no @, no
-profile URL. Your comments upstream are identified by this name.]
+**Contribution Number:** 1
+
+**Student:** Manas Singh Bhati
+
+**GitHub Username:** manasbhati24
+
 **Issue:** [GitHub issue link]
+
 **Pull Request:** [GitHub PR link, once opened]
 
 One repository, built across units 5 to 8, telling the whole story of your real
@@ -55,10 +58,9 @@ happened; these entries are the toolkit's own timeline.
 All four entries are graded. Keep every heading below, and fill each
 one in the week it belongs to.
 
-**Unit 5: [one line on the tool work]**
+**Unit 5: Creating search queries and ranking filters for issue scouting**
 
-[2-4 sentences: what you built (the scout, your strategy), what broke
-or fell short, what changed because of it.]
+I configured `issue-scout` with GitHub CLI search queries and ranking filters targeting Python backend and JSON issues. In testing, the literal boolean syntax `database OR sql` returned zero results, and the scout passed brand-new repos with zero stars because the rubric lacked repo-age or adoption filters. Furthermore, the portal's viable Python issues were already claimed, so I had to evaluate out-of-profile JavaScript/TypeScript candidates where the scout's checks passed.
 
 **Unit 6: [one line on the tool work]**
 
